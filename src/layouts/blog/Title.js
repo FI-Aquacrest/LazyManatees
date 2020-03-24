@@ -23,8 +23,8 @@ const useStyles = makeStyles(theme => ({
 export default function Title() {
   const classes = useStyles()
   const today = new Date()
-  const date = today.getFullYear() + '-' + (today.getMonth()+1) +
-    '-' + today.getDate()
+  const date = today.getDate() + '.' + (today.getMonth()+1) +
+    '.' + today.getFullYear()
 
   return (
     <Fragment>
