@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react"
+import React, { Fragment } from "react"
 import BlogPost from "./layouts/BlogPost"
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
