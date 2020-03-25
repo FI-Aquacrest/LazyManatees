@@ -1,18 +1,6 @@
-import React, { Fragment } from "react";
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  }
-}))
+import React from "react";
 
 export default function Content() {
-  const classes = useStyles()
-
   return <p>
     Lorem ipsum dolor sit amet, at blandit ac nonummy, rutrum lacus. Ipsum sed magnis velit purus sodales. Quisque tortor arcu mauris est, amet eget eleifend nam ac nibh facilisis, arcu non, pharetra ante metus mi tempus pede non, lectus tellus fringilla aliquam mattis sed. Blandit lobortis. Pulvinar quisque, porta porttitor interdum amet tortor in. Auctor neque, quam cursus orci, molestie malesuada suscipit duis magna. Turpis mattis vivamus hendrerit libero. Sed suspendisse ligula feugiat erat phasellus eget, felis vel justo libero ut phasellus, proin suscipit justo curabitur et class lobortis, nec dictum proin cras ut, ac sapien massa imperdiet at in scelerisque.
     <br /><br />

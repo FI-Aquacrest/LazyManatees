@@ -10,12 +10,13 @@ const useStyles = makeStyles(theme => ({
     },
   },
   Avatar: {
+    marginTop: '5px',
     height: '40px',
     width: '40px',
     float: 'left'
   },
   text: {
-    marginTop: '24px',
+    marginTop: '0px',
     marginLeft: '45px'
   }
 }))
