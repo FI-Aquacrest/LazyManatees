@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles(theme => ({
@@ -10,14 +11,14 @@ const useStyles = makeStyles(theme => ({
     },
   },
   Avatar: {
-    marginTop: '5px',
     height: '40px',
     width: '40px',
     float: 'left'
   },
   text: {
-    marginTop: '0px',
-    marginLeft: '45px'
+    float: 'left',
+    marginTop: '12.5px',
+    marginLeft: '5px'
   }
 }))
 
@@ -30,8 +31,16 @@ export default function Title() {
   return (
     <Fragment>
       <h1>Blog Post Title</h1>
-      <Avatar className={classes.Avatar}>B</Avatar>
-      <p className={classes.text}>Written by Blog Writer<br />{date}</p>
+
+      <Grid container direction="row" alignItems="center"> 
+        <Grid item>
+          <Avatar className={classes.Avatar}>B</Avatar>
+        </Grid>
+
+        <Grid item>
+          <p className={classes.text}>Written by Blog Writer<br />{date}</p>
+        </Grid>
+      </Grid>
     </Fragment>
   )
 }
