@@ -22,23 +22,25 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function Title() {
-  const classes = useStyles()
-  const today = new Date()
+export default function Title(props) {
+  const classes = useStyles();
+  const today = new Date();
   const date = today.getDate() + '.' + (today.getMonth()+1) +
-    '.' + today.getFullYear()
+    '.' + today.getFullYear();
+
+  const userLetter = props.userName[0];
 
   return (
     <Fragment>
-      <h1>Blog Post Title</h1>
+      <h1>{ props.blogTitle }</h1>
 
       <Grid container direction="row" alignItems="center"> 
         <Grid item>
-          <Avatar className={classes.Avatar}>B</Avatar>
+          <Avatar className={ classes.Avatar }>{ userLetter }</Avatar>
         </Grid>
 
         <Grid item>
-          <p className={classes.text}>Written by Blog Writer<br />{date}</p>
+          <p className={classes.text}>Written by { props.userName }<br />{date}</p>
         </Grid>
       </Grid>
     </Fragment>
