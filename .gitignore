@@ -10,6 +10,7 @@
 
 # production
 /build
+/backend/blog-master/target
 
 # misc
 .DS_Store

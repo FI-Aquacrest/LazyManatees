@@ -1,16 +1,7 @@
-import React, { Fragment, Component } from "react"
+import React, { Fragment } from "react"
 import Title from './blog/Title'
 import Content from './blog/Content'
 import Toolbar from "./blog/Toolbar"
-
-class BlogPost2 extends Component {
-  state = {
-    likes: 0,
-    dislikes: 0
-  }
-
-
-}
 
 export default function BlogPost() {
   let likes = 11;
