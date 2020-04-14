@@ -6,7 +6,8 @@ import Toolbar from './blog/Toolbar'
 class BlogPost extends Component {
   state = {
     isLoading: true,
-    blogObjects: []
+    blogObjects: [],
+    isEditable: false
   };
 
   async componentDidMount() {
@@ -15,49 +16,29 @@ class BlogPost extends Component {
     this.setState({ blogObjects: body, isLoading: false });
   }
 
-  render() {
-    const {blogObjects, isLoading} = this.state;
+  editPostCallback() {
+    this.setState({ isEditable: true })
+  }
 
-    const blogPost = blogObjects[0];
+  render() {
+    const {blogObjects, isLoading, isEditable} = this.state;
+    const blogObject = blogObjects[blogObjects.length-1]
 
     if (isLoading) {
       return <p>Loading...</p>;
     }
 
-    console.log('Found something: ' + blogPost.blogPost)
-
     let likes = 11;
     let dislikes = 999;
 
-    function likeCallback() {
-      likes++;
-      
-      console.log('likes: ' + likes);
-    }
-
-    function dislikeCallback() {
-      dislikes++;
-
-      console.log('dislikes: ' + dislikes)
-    }
-
-    function editPostCallback() {
-      console.log('editing');
-    }
-
-    function deletePostCallback() {
-      console.log('post deleted (not really)')
-    }
-
     return (
       <Fragment>
-        <Title blogTitle={ blogPost.blogTitle } userName={ blogPost.userName } />
+        <Title blogTitle={ blogObject.blogTitle } userName={ blogObject.userName } isEditable={ isEditable } />
         <hr />
-        <Content blogPost={ blogPost.blogPost } />
+        <Content blogPost={ blogObject.blogPost } isEditable={ isEditable } />
 
-        <Toolbar likes={ likes } dislikes={ dislikes } likeCallback={ likeCallback }
-        dislikeCallback={ dislikeCallback } editPostCallback={ editPostCallback }
-        deletePostCallback={ deletePostCallback } />
+        <Toolbar likes={ likes } dislikes={ dislikes }
+          editPostCallback={ this.editPostCallback.bind(this) } />
 
       </Fragment>
     )
