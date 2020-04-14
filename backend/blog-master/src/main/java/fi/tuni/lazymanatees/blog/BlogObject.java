@@ -1,6 +1,7 @@
 package fi.tuni.lazymanatees.blog;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,7 +11,10 @@ import java.io.Serializable;
 public class BlogObject implements Serializable {
 
     public String userName;
+
+    @Column(length = 10000)
     public String blogPost;
+
     public String blogTitle;
     //
 
