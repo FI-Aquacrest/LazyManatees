@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function App(props) {
+
   return (
     <Router>
       <div>
@@ -42,8 +43,12 @@ export default function App(props) {
           <Route path="/new">
             <New />
           </Route>
-          <Route path="/">
+          <Route exact path="/:postId(\d+)" component={ ViewPost } />
+          <Route path='/'>
             <Home />
+          </Route>
+          <Route path='/edit'>
+            <Edit />
           </Route>
         </Switch>
       </div>
@@ -69,8 +74,47 @@ function Home() {
   )
 }
 
+function ViewPost(props) {
+  const classes = useStyles()
+
+  let postId = props.match.params.postId;
+  postId++;
+
+  return (
+    <Fragment>
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={8}>
+            <Paper className={classes.paper}>
+              <BlogPost postId={ postId } />
+            </Paper>
+          </Grid>
+        </Grid>
+      </div>
+    </Fragment>
+  )
+}
+
 function New() {
   const classes = useStyles()
+
+  return (
+    <Fragment>
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={8}>
+            <Paper className={classes.paper}>
+              <NewPostForm />
+            </Paper>
+          </Grid>
+        </Grid>
+      </div>
+    </Fragment>
+  )
+}
+
+function Edit() {
+  const classes = useStyles();
 
   return (
     <Fragment>

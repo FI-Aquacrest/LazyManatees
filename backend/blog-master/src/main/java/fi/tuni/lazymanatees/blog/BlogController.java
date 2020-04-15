@@ -2,7 +2,6 @@ package fi.tuni.lazymanatees.blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -39,9 +38,14 @@ public class BlogController {
     }
 
     @RequestMapping(value = "/blogposts/{id}", method = RequestMethod.GET)
-    public BlogObject fetch(@PathVariable("id") int id) {
-        Optional<BlogObject> blogObject = blogdatabase.findById(id);
-        return blogObject.get();
+    public BlogObject get(@PathVariable("id") int id) {
+        return blogdatabase.findById(id).get();
+    }
+
+    @RequestMapping(value = "/blogposts", method = RequestMethod.PUT)
+    public BlogObject update(@RequestBody BlogObject blogObject) {
+        blogdatabase.save(blogObject);
+        return blogObject;
     }
 
     /**
