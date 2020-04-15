@@ -26,23 +26,25 @@ class NewPostForm extends Component {
     const content = this.state.content;
     const title = this.state.title;
 
-    console.log(writer)
-
-    fetch('/api/blogposts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        userName: writer,
-        blogPost: content,
-        blogTitle: title
-      })
-    }).then(
-      alert("Post Saved")
-    ).then(
-      window.location.href = '/'
-    )
+    if (writer === '' || content === '' || title === '') {
+      alert('Please make sure to fill all fields.');
+    } else {
+      fetch('/api/blogposts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userName: writer,
+          blogPost: content,
+          blogTitle: title
+        })
+      }).then(
+        alert("Post Saved")
+      ).then(
+        window.location.href = '/'
+      )
+    }
   }
 
   render() {
@@ -50,7 +52,7 @@ class NewPostForm extends Component {
       <Fragment>
         <form id='NewPostForm'>
           <label htmlFor='title'>Title</label><br />
-          <input type='text' id='title' value={ this.state.title }
+          <input type='text' id='title' value={ this.state.title } style={{ width: '50%' }}
             onChange={ this.titleChangeEvent.bind(this) } />
 
           <br /><br />

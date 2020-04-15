@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Content(props) {
-return <p>{ props.blogPost }</p>
+  return <p style={{ whiteSpace: 'pre-line' }}>{ props.blogPost }</p>
 }
