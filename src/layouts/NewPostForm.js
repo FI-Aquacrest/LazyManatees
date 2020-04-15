@@ -6,7 +6,19 @@ class NewPostForm extends Component {
   state = {
     title: '',
     writer: '',
-    content: ''
+    content: '',
+    editPostId: null,
+    editing: false
+  }
+
+  componentDidMount() {
+    if (this.props.blogObject !== undefined) {
+      this.setState({ title: this.props.blogObject.blogTitle,
+                      writer: this.props.blogObject.userName,
+                      content: this.props.blogObject.blogPost,
+                      editPostId: this.props.blogObject.id,
+                      editing: true })
+    }
   }
 
   titleChangeEvent(event) {
@@ -26,32 +38,52 @@ class NewPostForm extends Component {
     const content = this.state.content;
     const title = this.state.title;
 
-    console.log(writer)
-
-    fetch('/api/blogposts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        userName: writer,
-        blogPost: content,
-        blogTitle: title
-      })
-    }).then(
-      alert("Post Saved")
-    ).then(
-      window.location.href = '/'
-    )
+    if (writer === '' || content === '' || title === '') {
+      alert('Please make sure to fill all fields.');
+    } else if (this.state.editing) {
+      fetch('/api/blogposts', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userName: writer,
+          blogPost: content,
+          blogTitle: title,
+          id: this.state.editPostId
+        })
+      }).then(
+        alert("Post Updated")
+      ).then(
+        window.location.href = '/' + (this.state.editPostId - 1)
+      )
+    } else {
+      fetch('/api/blogposts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userName: writer,
+          blogPost: content,
+          blogTitle: title
+        })
+      }).then(
+        alert("Post Saved")
+      ).then(
+        window.location.href = '/'
+      )
+    }
   }
 
   render() {
+
     return (
       <Fragment>
         <form id='NewPostForm'>
           <label htmlFor='title'>Title</label><br />
-          <input type='text' id='title' value={ this.state.title }
-            onChange={ this.titleChangeEvent.bind(this) } />
+          <input type='text' id='title' value={ this.state.title } style={{ width: '50%' }}
+            onChange={ this.titleChangeEvent.bind(this)} />
 
           <br /><br />
 

@@ -2,30 +2,38 @@ import React, { Fragment, Component } from 'react'
 import Title from './blog/Title'
 import Content from './blog/Content'
 import Toolbar from './blog/Toolbar'
+import NewPostForm from './NewPostForm'
 
 class BlogPost extends Component {
   state = {
     isLoading: true,
-    blogObjects: [],
-    isEditable: false
+    blogObject: null,
+    editing: false
   };
 
   async componentDidMount() {
-    const response = await fetch('/api/blogposts');
+    const response = await fetch('/api/blogposts/' + this.props.postId );
     const body = await response.json();
-    this.setState({ blogObjects: body, isLoading: false });
+    this.setState({ blogObject: body, isLoading: false });
   }
 
   editPostCallback() {
-    this.setState({ isEditable: true })
+    this.setState({ editing: true });
   }
 
   render() {
-    const {blogObjects, isLoading, isEditable} = this.state;
-    const blogObject = blogObjects[blogObjects.length-1]
+    const {blogObject, isLoading, editing} = this.state;
 
     if (isLoading) {
       return <p>Loading...</p>;
+    } else if (editing) {
+      return (
+        <NewPostForm blogObject={ blogObject } />
+      )
+    }
+
+    if (blogObject.userName === undefined) {
+      return <p>404</p>
     }
 
     let likes = 11;
@@ -33,12 +41,11 @@ class BlogPost extends Component {
 
     return (
       <Fragment>
-        <Title blogTitle={ blogObject.blogTitle } userName={ blogObject.userName } isEditable={ isEditable } />
+        <Title blogTitle={ blogObject.blogTitle } userName={ blogObject.userName } />
         <hr />
-        <Content blogPost={ blogObject.blogPost } isEditable={ isEditable } />
+        <Content blogPost={ blogObject.blogPost } />
 
-        <Toolbar likes={ likes } dislikes={ dislikes }
-          editPostCallback={ this.editPostCallback.bind(this) } />
+        <Toolbar likes={ likes } dislikes={ dislikes } editPostCallback={ this.editPostCallback.bind(this) } />
 
       </Fragment>
     )
