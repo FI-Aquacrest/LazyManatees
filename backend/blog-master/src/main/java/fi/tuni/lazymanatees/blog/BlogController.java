@@ -48,6 +48,11 @@ public class BlogController {
         return blogObject;
     }
 
+    @RequestMapping(value = "/blogposts", method = RequestMethod.DELETE)
+    public @ResponseBody void delete(@RequestBody BlogObject blogObject) {
+        blogdatabase.delete(blogObject);
+    }
+
     /**
     @PostMapping("/save/{uName}{blogpost}")
     private void saveBlogObject(@RequestBody BlogObject o) {

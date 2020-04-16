@@ -21,6 +21,24 @@ class BlogPost extends Component {
     this.setState({ editing: true });
   }
 
+  deletePostCallback() {
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      fetch('/api/blogposts', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+          this.state.blogObject
+        )
+      }).then(
+        alert('Post deleted')
+      ).then(
+        window.location.href = '/'
+      )
+    }
+  }
+
   render() {
     const {blogObject, isLoading, editing} = this.state;
 
@@ -45,7 +63,9 @@ class BlogPost extends Component {
         <hr />
         <Content blogPost={ blogObject.blogPost } />
 
-        <Toolbar likes={ likes } dislikes={ dislikes } editPostCallback={ this.editPostCallback.bind(this) } />
+        <Toolbar likes={ likes } dislikes={ dislikes }
+          editPostCallback={ this.editPostCallback.bind(this) }
+          deletePostCallback={ this.deletePostCallback.bind(this) } />
 
       </Fragment>
     )
