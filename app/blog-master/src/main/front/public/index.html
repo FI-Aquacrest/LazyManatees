@@ -37,32 +37,23 @@
   </head>
   <body>
     <div id="titleText">BLOG SITE</div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-      <a class="navbar-brand" href="#"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
-              Info
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">About me</a>
-              <a class="dropdown-item" href="#">Why I started this blog</a>
-              <a class="dropdown-item" href="#">Contacts</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">New Post</a>
-          </li>
-        </ul>
+    function Home() {
+    const classes = useStyles()
+
+    return (
+    <Fragment>
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={8}>
+            <Paper className={classes.paper}>
+              <BlogPost postId={1} />
+            </Paper>
+          </Grid>
+        </Grid>
       </div>
-    </nav>
+    </Fragment>
+    )
+    }
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="app"></div>
     <!--
