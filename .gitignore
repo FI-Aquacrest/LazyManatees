@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+/app/blog-master/src/main/front/node_modules
 /.pnp
 .pnp.js
 
@@ -10,7 +10,7 @@
 
 # production
 /build
-/backend/blog-master/target
+/app/blog-master/target
 
 # misc
 .DS_Store
