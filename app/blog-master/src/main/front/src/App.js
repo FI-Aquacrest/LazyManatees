@@ -8,6 +8,7 @@ import {
 
 import BlogPost from "./layouts/BlogPost"
 import NewPostForm from "./layouts/NewPostForm"
+import HomePage from './layouts/HomePage'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
@@ -65,7 +66,8 @@ function Home() {
         <Grid container spacing={3}>
           <Grid item xs={8}>
             <Paper className={classes.paper}>
-              <BlogPost postId={1} />
+              <p>The links below will not work through the .jar file. Needs TLC.</p>
+              <HomePage />
             </Paper>
           </Grid>
         </Grid>
