@@ -14,9 +14,9 @@ public class BlogController {
 
     @PostConstruct
     public void init() {
-        blogdatabase.save(new BlogObject("Tester 1", "Random shit", "title1"));
-        blogdatabase.save(new BlogObject("Tester 2", "More random shit", "title2"));
-        blogdatabase.save(new BlogObject("Tester 3", "Even more random shit", "title3"));
+        blogdatabase.save(new BlogObject("Tester 1", "Random stuff", "title1"));
+        blogdatabase.save(new BlogObject("Tester 2", "More random stuff", "title2"));
+        blogdatabase.save(new BlogObject("Tester 3", "Even more random stuff", "title3"));
     }
 
     /**
