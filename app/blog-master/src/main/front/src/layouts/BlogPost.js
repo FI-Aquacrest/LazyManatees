@@ -31,11 +31,15 @@ class BlogPost extends Component {
         body: JSON.stringify(
           this.state.blogObject
         )
-      }).then(
-        alert('Post deleted')
-      ).then(
-        window.location.href = '/'
-      )
+      }).then(response => {
+        console.log(response);
+        if (response.status === 200) {
+          alert("Post Deleted");
+          window.location.href = '/';
+        } else {
+          alert("Authorization Required");
+        }
+      })
     }
   }
 

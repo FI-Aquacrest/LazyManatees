@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'left',
     color: theme.palette.text.secondary,
   },
-}))
+}));
 
 export default function App(props) {
 
@@ -30,10 +30,10 @@ export default function App(props) {
     <Router>
 
       <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <a className="navbar-brand" href="#"></a>
+        <a className="navbar-brand" href="#"/>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"/>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
@@ -66,7 +66,7 @@ export default function App(props) {
 }
 
 function Home() {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <Fragment>
@@ -74,7 +74,6 @@ function Home() {
         <Grid container spacing={3}>
           <Grid item xs={8}>
             <Paper className={classes.paper}>
-              <p>The links below will not work through the .jar file. Needs TLC.</p>
               <HomePage />
             </Paper>
           </Grid>
@@ -85,7 +84,7 @@ function Home() {
 }
 
 function ViewPost(props) {
-  const classes = useStyles()
+  const classes = useStyles();
 
   let postId = props.match.params.postId;
   postId++;
@@ -139,7 +138,4 @@ function Edit() {
       </div>
     </Fragment>
   )
-}
-
-function NavBar() {
 }

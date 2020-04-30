@@ -1,4 +1,4 @@
-import React, { Component, createElement } from 'react'
+import React, {Component, createElement} from 'react'
 
 class HomePage extends Component {
   state = {
@@ -17,9 +17,8 @@ class HomePage extends Component {
     let linkList = [];
 
     for (let x = 0; x < blogObjects.length; x++) {
-      let link = createElement('a', {href: '/' + x}, blogObjects[x].blogTitle)
-      const row = createElement('li', {}, link);
-      linkList[x] = row;
+      let link = createElement('a', {href: '/' + x}, blogObjects[x].blogTitle);
+      linkList[x] = createElement('li', {key: x}, link);
     }
 
     return linkList;

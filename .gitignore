@@ -12,6 +12,9 @@
 /app/blog-master/src/main/front/build
 /app/blog-master/target
 
+# .idea
+/app/blog-master/.idea
+/app/blog-master/blog.iml
 
 # misc
 .DS_Store
