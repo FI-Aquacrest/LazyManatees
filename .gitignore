@@ -9,8 +9,9 @@
 /coverage
 
 # production
-/build
+/app/blog-master/src/main/front/build
 /app/blog-master/target
+
 
 # misc
 .DS_Store
