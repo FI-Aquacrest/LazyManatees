@@ -43,6 +43,10 @@ export default function App(props) {
             <li className="nav-item">
               <Link to="/new">New Post</Link>
             </li>
+            <li>
+              <input type="text" id="search" placeholder="Search"/>
+              <button onClick={searchFunction}>Search</button>
+            </li>
           </ul>
         </div>
       </nav>
@@ -74,7 +78,9 @@ function Home() {
         <Grid container spacing={3}>
           <Grid item xs={8}>
             <Paper className={classes.paper}>
-              <HomePage />
+              <ul  id="postList">
+                <HomePage/>
+              </ul>
             </Paper>
           </Grid>
         </Grid>
@@ -105,7 +111,7 @@ function ViewPost(props) {
 }
 
 function New() {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <Fragment>
@@ -113,7 +119,7 @@ function New() {
         <Grid container spacing={3}>
           <Grid item xs={8}>
             <Paper className={classes.paper}>
-              <NewPostForm />
+              <NewPostForm/>
             </Paper>
           </Grid>
         </Grid>
@@ -138,4 +144,23 @@ function Edit() {
       </div>
     </Fragment>
   )
+}
+
+function searchFunction() {
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('search');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("postList");
+  li = ul.getElementsByTagName('li');
+  console.log(li);
+
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
 }
