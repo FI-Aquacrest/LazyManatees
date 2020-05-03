@@ -9,12 +9,8 @@
 /coverage
 
 # production
-/app/blog-master/src/main/front/build
+/build
 /app/blog-master/target
-
-# .idea
-/app/blog-master/.idea
-/app/blog-master/blog.iml
 
 # misc
 .DS_Store
@@ -27,8 +23,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .vscode/settings.json
-.idea/workspace.xml
-.idea/modules.xml
-.idea/misc.xml
-.idea/LazyManatees.iml
-.idea/vcs.xml

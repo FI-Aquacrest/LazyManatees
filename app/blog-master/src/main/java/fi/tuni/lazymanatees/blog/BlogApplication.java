@@ -31,8 +31,7 @@ public class BlogApplication implements CommandLineRunner {
 	public CommandLineRunner instructions() {
 		return (String... args) -> {
 			Log logger = LogFactory.getLog(BlogApplication.class);
-			logger.info("The app is now running at http://localhost:8080/");
-			logger.info("You can view the contents of the database at http://localhost:8080/api/blogposts");
+			logger.info("This is a test!");
 
 		};
 	}
