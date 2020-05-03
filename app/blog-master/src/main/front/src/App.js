@@ -8,7 +8,6 @@ import {
 
 import BlogPost from "./layouts/BlogPost"
 import NewPostForm from "./layouts/NewPostForm"
-import HomePage from './layouts/HomePage'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
@@ -22,36 +21,28 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'left',
     color: theme.palette.text.secondary,
   },
-}));
+}))
 
 export default function App(props) {
 
   return (
     <Router>
-
-      <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <a className="navbar-brand" href="#"/>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"/>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item active">
+      <div>
+        <nav>
+          <ul>
+            <li>
               <Link to="/">Home</Link>
             </li>
+<<<<<<< HEAD
+            <li>
+=======
             <li className="nav-item">
+>>>>>>> parent of fa21ac4... Add searchbar
               <Link to="/new">New Post</Link>
             </li>
-            <li>
-              <input type="text" id="search" placeholder="Search"/>
-              <button onClick={searchFunction}>Search</button>
-            </li>
           </ul>
-        </div>
-      </nav>
+        </nav>
 
-      <div>
         <Switch>
           <Route path="/new">
             <New />
@@ -70,7 +61,7 @@ export default function App(props) {
 }
 
 function Home() {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <Fragment>
@@ -78,9 +69,11 @@ function Home() {
         <Grid container spacing={3}>
           <Grid item xs={8}>
             <Paper className={classes.paper}>
-              <ul  id="postList">
-                <HomePage/>
-              </ul>
+<<<<<<< HEAD
+              <BlogPost postId={1} />
+=======
+              <HomePage />
+>>>>>>> parent of fa21ac4... Add searchbar
             </Paper>
           </Grid>
         </Grid>
@@ -90,7 +83,7 @@ function Home() {
 }
 
 function ViewPost(props) {
-  const classes = useStyles();
+  const classes = useStyles()
 
   let postId = props.match.params.postId;
   postId++;
@@ -111,7 +104,7 @@ function ViewPost(props) {
 }
 
 function New() {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <Fragment>
@@ -119,7 +112,7 @@ function New() {
         <Grid container spacing={3}>
           <Grid item xs={8}>
             <Paper className={classes.paper}>
-              <NewPostForm/>
+              <NewPostForm />
             </Paper>
           </Grid>
         </Grid>
@@ -144,23 +137,4 @@ function Edit() {
       </div>
     </Fragment>
   )
-}
-
-function searchFunction() {
-  var input, filter, ul, li, a, i, txtValue;
-  input = document.getElementById('search');
-  filter = input.value.toUpperCase();
-  ul = document.getElementById("postList");
-  li = ul.getElementsByTagName('li');
-  console.log(li);
-
-  for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName("a")[0];
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
 }
