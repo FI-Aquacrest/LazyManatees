@@ -14,10 +14,17 @@ public class BlogController {
 
     @PostConstruct
     public void init() {
-        blogdatabase.save(new BlogObject("Tester 1", "Random stuff", "title1"));
-        blogdatabase.save(new BlogObject("Tester 2", "More random stuff", "title2"));
-        blogdatabase.save(new BlogObject("Tester 3", "Even more random stuff", "title3"));
+        blogdatabase.save(new BlogObject("Tester 1", "Random shit", "title1"));
+        blogdatabase.save(new BlogObject("Tester 2", "More random shit", "title2"));
+        blogdatabase.save(new BlogObject("Tester 3", "Even more random shit", "title3"));
     }
+
+    /**
+    @RequestMapping(value = "/blogposts", method = RequestMethod.POST)
+    public void newPost(@RequestParam("userName") String userName, @RequestParam("blogPost") String blogPost, @RequestParam("blogTitle") String blogTitle) {
+        blogdatabase.save(new BlogObject(userName, blogPost, blogTitle));
+    }
+    */
 
     @RequestMapping(value = "/blogposts", method = RequestMethod.POST)
     public @ResponseBody BlogObject newPost(@RequestBody BlogObject blogObject) {
@@ -45,4 +52,11 @@ public class BlogController {
     public @ResponseBody void delete(@RequestBody BlogObject blogObject) {
         blogdatabase.delete(blogObject);
     }
+
+    /**
+    @PostMapping("/save/{uName}{blogpost}")
+    private void saveBlogObject(@RequestBody BlogObject o) {
+        o.saveBlogObject("uname");
+    }
+    */
 }

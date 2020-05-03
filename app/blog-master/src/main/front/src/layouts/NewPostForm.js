@@ -52,15 +52,11 @@ class NewPostForm extends Component {
           blogTitle: title,
           id: this.state.editPostId
         })
-      }).then(response => {
-        console.log(response);
-        if (response.status === 200) {
-          alert("Post Updated");
-          window.location.href = '/';
-        } else {
-          alert("Authorization Required");
-        }
-      })
+      }).then(
+        alert("Post Updated")
+      ).then(
+        window.location.href = '/' + (this.state.editPostId - 1)
+      )
     } else {
       fetch('/api/blogposts', {
         method: 'POST',
@@ -72,15 +68,11 @@ class NewPostForm extends Component {
           blogPost: content,
           blogTitle: title
         })
-      }).then(response => {
-        console.log(response);
-        if (response.status === 200) {
-          alert("Post Saved");
-          window.location.href = '/';
-        } else {
-          alert("Authorization Required");
-        }
-      })
+      }).then(
+        alert("Post Saved")
+      ).then(
+        window.location.href = '/'
+      )
     }
   }
 
@@ -107,7 +99,7 @@ class NewPostForm extends Component {
 
           <br /><br />
 
-          <Button variant='contained' onClick={ this.postCommand.bind(this) }>Save</Button>
+          <Button variant='contained' onClick={ this.postCommand.bind(this) }>Post</Button>
         </form>
       </Fragment>
     )
