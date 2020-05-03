@@ -36,16 +36,16 @@ export default function App(props) {
           <span className="navbar-toggler-icon"/>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item active">
+          <ul className="navbar-nav" id="navBar">
+            <li className="nav-item active" id="homeButton">
               <Link to="/">Home</Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item" id="newPostButton">
               <Link to="/new">New Post</Link>
             </li>
             <li>
               <input type="text" id="search" placeholder="Search"/>
-              <button onClick={searchFunction}>Search</button>
+              <button id="searchButton" onClick={searchFunction}>Search</button>
             </li>
           </ul>
         </div>

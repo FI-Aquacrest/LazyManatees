@@ -20,3 +20,15 @@ body {
     bottom: 0;
     width: 100%;
 }
+
+#homeButton {
+    margin: 0px 10px;
+}
+
+#newPostButton {
+    margin: 0px 10px;
+}
+
+#search {
+    margin: 0px 0px 0px 10px;
+}
