@@ -1,6 +1,6 @@
 import React, { Fragment } from "react"
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
   Link
@@ -9,9 +9,13 @@ import {
 import BlogPost from "./layouts/BlogPost"
 import NewPostForm from "./layouts/NewPostForm"
 import HomePage from './layouts/HomePage'
+import LoginComponent from './layouts/LoginComponent'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
+
+import AuthenticationService from './service/AuthenticationService';
+import History from './History';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,11 +30,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function App(props) {
 
+  let adminLoggedIn = AuthenticationService.isUserLoggedIn();
+
   return (
-    <Router>
+    <Router history={History}>
 
       <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <a className="navbar-brand" href="#"/>
+        <p />
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"/>
@@ -40,12 +46,15 @@ export default function App(props) {
             <li className="nav-item active" id="homeButton">
               <Link to="/">Home</Link>
             </li>
-            <li className="nav-item" id="newPostButton">
+            <li className="nav-item" id="newPostButton" hidden={ !adminLoggedIn }>
               <Link to="/new">New Post</Link>
             </li>
             <li>
               <input type="text" id="search" placeholder="Search"/>
               <button id="searchButton" onClick={searchFunction}>Search</button>
+            </li>
+            <li className="nav-item" id="newPostButton">
+              <Link to="/login">Login</Link>
             </li>
           </ul>
         </div>
@@ -57,12 +66,11 @@ export default function App(props) {
             <New />
           </Route>
           <Route exact path="/:postId(\d+)" component={ ViewPost } />
-          <Route path='/'>
-            <Home />
-          </Route>
+          <Route path='/' exact component={Home} />
           <Route path='/edit'>
             <Edit />
           </Route>
+          <Route path='/login' exact component={Login} />
         </Switch>
       </div>
     </Router>
@@ -78,7 +86,7 @@ function Home() {
         <Grid container spacing={3}>
           <Grid item xs={8}>
             <Paper className={classes.paper}>
-              <ul  id="postList">
+              <ul id="postList">
                 <HomePage/>
               </ul>
             </Paper>
@@ -143,6 +151,24 @@ function Edit() {
         </Grid>
       </div>
     </Fragment>
+  )
+}
+
+function Login() {
+  const classes = useStyles();
+
+  return (
+      <Fragment>
+        <div className={classes.root}>
+          <Grid container spacing={3}>
+            <Grid item xs={8}>
+              <Paper className={classes.paper}>
+                <LoginComponent />
+              </Paper>
+            </Grid>
+          </Grid>
+        </div>
+      </Fragment>
   )
 }
 
