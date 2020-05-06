@@ -52,7 +52,7 @@ const App = () => {
     return (
       <ul>
         <h2>Welcome!</h2>
-        <h3><br/>Posts you might like</h3>
+        <h4><br/>Posts you might like</h4>
         <RandomPosts />
       </ul>
     )
@@ -61,6 +61,7 @@ const App = () => {
   function SideBar() {
     return (
         <ul id="postList">
+          <h4><br/>Most recents Posts</h4>
           <PostList />
         </ul>
     )

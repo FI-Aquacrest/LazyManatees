@@ -1,5 +1,8 @@
 import {Component, createElement} from 'react'
 
+/**
+ * @class RandomPosts returns max 3 random posts.
+ */
 class RandomPosts extends Component {
   state = {
     isLoading: true,
@@ -12,6 +15,11 @@ class RandomPosts extends Component {
     this.setState({ blogObjects: body, isLoading: false });
   }
 
+  /**
+   * Return max 3 or as many blogObjects are saved
+   *
+   * @returns {array}
+   */
   render() {
     const blogObjects = this.state.blogObjects;
     let linkList = [];
@@ -28,6 +36,12 @@ class RandomPosts extends Component {
     }
   }
 
+  /**
+   * Returns a shuffled array using the Durstenfeld shuffle-algorithm
+   *
+   * @param array
+   * @returns {array}
+   */
   shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
