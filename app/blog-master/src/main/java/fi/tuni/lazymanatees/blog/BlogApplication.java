@@ -24,7 +24,7 @@ public class BlogApplication implements CommandLineRunner {
 
 		//Tests for terminalprint
 		//blogdatabase.findAll().forEach(System.out::println);
-		blogdatabase.save(new BlogObject("sda","afsaf", "title3"));
+		//blogdatabase.save(new BlogObject("sda","afsaf", "title3"));
 	}
 
 	@Bean
