@@ -81,6 +81,11 @@ const App = () => {
     return <NewPostForm />;
   }
 
+  /**
+   * Search function used by the searchbar
+   *
+   * Makes every object invisible except the ones which are filtered.
+   */
   function searchFunction() {
     let input, filter, ul, li, a, i, txtValue;
     input = document.getElementById('search');
