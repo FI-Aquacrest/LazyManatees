@@ -8,7 +8,6 @@ import {
 
 import BlogPost from "./layouts/BlogPost"
 import NewPostForm from "./layouts/NewPostForm"
-import HomePage from './layouts/HomePage'
 import RandomPosts from './layouts/blog/RandomPosts'
 import PostList from './layouts/PostList'
 import LoginComponent from './layouts/LoginComponent'
@@ -35,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const App = (props) => {
+const App = () => {
   const classes = useStyles();
 
   const [adminLoggedIn, setAdminLoggedIn] = useState(AuthenticationService.isUserLoggedIn);
@@ -50,12 +49,14 @@ const App = (props) => {
   }
 
   function Home() {
-    <ul id="postList">
-      <h3>Most recent posts</h3>
-      <HomePage/>
-      <h3><br/>Posts you might like</h3>
-      <RandomPosts/>
-    </ul>
+    return (
+      <ul id="postList">
+        <h2>Welcome!</h2>
+        <h3><br/>Posts you might like</h3>
+        <RandomPosts />
+      </ul>
+    )
+  }
 
   function SideBar() {
     return (
