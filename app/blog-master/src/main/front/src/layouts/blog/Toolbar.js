@@ -6,8 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/EditRounded';
 import ThumbUpIcon from '@material-ui/icons/ThumbUpAltRounded';
 import ThumbDownIcon from '@material-ui/icons/ThumbDownAltRounded';
-
-const adminLoggedIn = true;
+import AuthenticationService from '../../service/AuthenticationService';
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -19,61 +18,49 @@ const useStyles = makeStyles((theme) => ({
 export default function Toolbar(props) {
   const classes = useStyles();
 
-  if (adminLoggedIn) {
-    return (
-      <div>
-        <Grid container direction="row" alignItems="center">
-          <Grid item>
-            <IconButton aria-label="like" onClick={() => { props.likeCallback() }}>
-              <ThumbUpIcon />
-            </IconButton>
-          </Grid>
+  let adminLoggedIn = AuthenticationService.isUserLoggedIn();
 
-          <Grid item>
-            { props.likes }
-          </Grid>
-
-          <div className={ classes.divider } />
-
-          <Grid item>
-            <IconButton aria-label="dislike" onClick={() => { props.dislikeCallback() }}>
-              <ThumbDownIcon />
-            </IconButton>
-          </Grid>
-
-          <Grid item>
-            { props.dislikes }
-          </Grid>
-
-          <div className={ classes.divider } />
-
-          <Grid item>
-            <IconButton aria-label="edit" onClick={() => { props.editPostCallback() }}>
-              <EditIcon />
-            </IconButton>
-          </Grid>
-
-          <div className={classes.divider} />
-    
-          <Grid item>
-            <IconButton aria-label="delete" onClick={() => { props.deletePostCallback() }}>
-              <DeleteIcon />
-            </IconButton>
-          </Grid>
+  return (
+    <div>
+      <Grid container direction="row" alignItems="center">
+        <Grid item>
+          <IconButton aria-label="like" onClick={() => { props.likeCallback() }}>
+            <ThumbUpIcon />
+          </IconButton>
         </Grid>
-      </div>
-    );
-  } else {
-    return (
-      <div className={classes.root}>
-        <IconButton aria-label="like" onClick={() => { props.likes++; }}>
-          <ThumbUpIcon />
-        </IconButton>
 
-        <IconButton aria-label="dislike">
-          <ThumbDownIcon />
-        </IconButton>
-      </div>
-    );
-  }
+        <Grid item>
+          { props.likes }
+        </Grid>
+
+        <div className={ classes.divider } />
+
+        <Grid item>
+          <IconButton aria-label="dislike" onClick={() => { props.dislikeCallback() }}>
+            <ThumbDownIcon />
+          </IconButton>
+        </Grid>
+
+        <Grid item>
+          { props.dislikes }
+        </Grid>
+
+        <div className={ classes.divider } hidden={ !adminLoggedIn } />
+
+        <Grid item hidden={ !adminLoggedIn }>
+          <IconButton aria-label="edit" onClick={() => { props.editPostCallback() }}>
+            <EditIcon />
+          </IconButton>
+        </Grid>
+
+        <div className={classes.divider} hidden={ !adminLoggedIn } />
+
+        <Grid item hidden={ !adminLoggedIn }>
+          <IconButton aria-label="delete" onClick={() => { props.deletePostCallback() }}>
+            <DeleteIcon />
+          </IconButton>
+        </Grid>
+      </Grid>
+    </div>
+  );
 }

@@ -4,6 +4,8 @@ import Content from './blog/Content'
 import Toolbar from './blog/Toolbar'
 import NewPostForm from './NewPostForm'
 
+import AxiosInstance from "../service/AxiosInstance";
+
 class BlogPost extends Component {
   state = {
     isLoading: true,
@@ -12,9 +14,14 @@ class BlogPost extends Component {
   };
 
   async componentDidMount() {
-    const response = await fetch('/api/blogposts/' + this.props.postId );
-    const body = await response.json();
-    this.setState({ blogObject: body, isLoading: false });
+    // const response = await fetch('/api/blogposts/' + this.props.postId);
+    // const body = await response.json();
+    // this.setState({ blogObject: body, isLoading: false });
+
+    AxiosInstance.get('/api/blogposts/' + this.props.postId)
+        .then((response) => {
+          this.setState({ blogObject: response.data, isLoading: false });
+        });
   }
 
   editPostCallback() {
@@ -23,14 +30,29 @@ class BlogPost extends Component {
 
   deletePostCallback() {
     if (window.confirm("Are you sure you want to delete this post?")) {
-      fetch('/api/blogposts', {
-        method: 'DELETE',
+      // fetch('/api/blogposts', {
+      //   method: 'DELETE',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify(
+      //     this.state.blogObject
+      //   )
+      // }).then(response => {
+      //   console.log(response);
+      //   if (response.status === 200) {
+      //     alert("Post Deleted");
+      //     window.location.href = '/';
+      //   } else {
+      //     alert("Authorization Required");
+      //   }
+      // })
+
+      AxiosInstance.delete('/api/blogposts', {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(
-          this.state.blogObject
-        )
+        data: JSON.stringify(this.state.blogObject)
       }).then(response => {
         console.log(response);
         if (response.status === 200) {
@@ -39,7 +61,9 @@ class BlogPost extends Component {
         } else {
           alert("Authorization Required");
         }
-      })
+      }).catch(error => {
+        console.log(error);
+      });
     }
   }
 

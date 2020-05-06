@@ -1,5 +1,8 @@
-import React, { Component, Fragment } from 'react'
-import Button from '@material-ui/core/Button'
+import React, { Component, Fragment } from 'react';
+import Button from '@material-ui/core/Button';
+import History from '../History';
+
+import AxiosInstance from "../service/AxiosInstance";
 
 class NewPostForm extends Component {
 
@@ -9,7 +12,7 @@ class NewPostForm extends Component {
     content: '',
     editPostId: null,
     editing: false
-  }
+  };
 
   componentDidMount() {
     if (this.props.blogObject !== undefined) {
@@ -41,42 +44,79 @@ class NewPostForm extends Component {
     if (writer === '' || content === '' || title === '') {
       alert('Please make sure to fill all fields.');
     } else if (this.state.editing) {
-      fetch('/api/blogposts', {
-        method: 'PUT',
+      // fetch('/api/blogposts', {
+      //   method: 'PUT',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({
+      //     userName: writer,
+      //     blogPost: content,
+      //     blogTitle: title,
+      //     id: this.state.editPostId
+      //   })
+      // }).then(response => {
+      //   console.log(response);
+      //   if (response.status === 200) {
+      //     alert("Post Updated");
+      //     window.location.href = '/';
+      //   } else {
+      //     alert("Authorization Required");
+      //   }
+      // })
+
+      AxiosInstance.put('/api/blogposts', {
+        userName: writer,
+        blogPost: content,
+        blogTitle: title,
+        id: this.state.editPostId
+      }, {
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          userName: writer,
-          blogPost: content,
-          blogTitle: title,
-          id: this.state.editPostId
-        })
+        }
       }).then(response => {
         console.log(response);
         if (response.status === 200) {
           alert("Post Updated");
-          window.location.href = '/';
+          History.push('/');
         } else {
           alert("Authorization Required");
         }
       })
     } else {
-      fetch('/api/blogposts', {
-        method: 'POST',
+      // fetch('/api/blogposts', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({
+      //     userName: writer,
+      //     blogPost: content,
+      //     blogTitle: title
+      //   })
+      // }).then(response => {
+      //   console.log(response);
+      //   if (response.status === 200) {
+      //     alert("Post Saved");
+      //     History.push('/');
+      //   } else {
+      //     alert("Authorization Required");
+      //   }
+      // })
+
+      AxiosInstance.post('/api/blogposts', {
+        userName: writer,
+        blogPost: content,
+        blogTitle: title
+      }, {
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          userName: writer,
-          blogPost: content,
-          blogTitle: title
-        })
+        }
       }).then(response => {
         console.log(response);
         if (response.status === 200) {
           alert("Post Saved");
-          window.location.href = '/';
+          History.push('/');
         } else {
           alert("Authorization Required");
         }
