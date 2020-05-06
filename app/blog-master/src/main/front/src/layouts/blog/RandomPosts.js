@@ -1,6 +1,6 @@
 import {Component, createElement} from 'react'
 
-class HomePage extends Component {
+class RandomPosts extends Component {
   state = {
     isLoading: true,
     blogObjects: []
@@ -21,8 +21,22 @@ class HomePage extends Component {
       linkList[x] = createElement('li', {key: x}, link);
     }
 
-    return linkList.reverse();
+    if (linkList.length > 3) {
+      return this.shuffleArray(linkList).slice(0, 3);
+    } else {
+      return this.shuffleArray(linkList).slice(0, linkList.length);
+    }
+  }
+
+  shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
   }
 }
 
-export default HomePage;
+export default RandomPosts;

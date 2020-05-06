@@ -9,6 +9,7 @@ import {
 import BlogPost from "./layouts/BlogPost"
 import NewPostForm from "./layouts/NewPostForm"
 import HomePage from './layouts/HomePage'
+import RandomPosts from './layouts/blog/RandomPosts'
 import LoginComponent from './layouts/LoginComponent'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
@@ -87,7 +88,10 @@ function Home() {
           <Grid item xs={8}>
             <Paper className={classes.paper}>
               <ul id="postList">
+                <h3>Most recent posts</h3>
                 <HomePage/>
+                <h3><br/>Posts you might like</h3>
+                <RandomPosts/>
               </ul>
             </Paper>
           </Grid>
