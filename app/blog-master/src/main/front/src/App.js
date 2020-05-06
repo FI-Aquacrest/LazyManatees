@@ -50,12 +50,12 @@ export default function App(props) {
             <li className="nav-item" id="newPostButton" hidden={ !adminLoggedIn }>
               <Link to="/new">New Post</Link>
             </li>
+            <li className="nav-item" id="newPostButton">
+              <Link to="/login">Login</Link>
+            </li>
             <li>
               <input type="text" id="search" placeholder="Search"/>
               <button id="searchButton" onClick={searchFunction}>Search</button>
-            </li>
-            <li className="nav-item" id="newPostButton">
-              <Link to="/login">Login</Link>
             </li>
           </ul>
         </div>

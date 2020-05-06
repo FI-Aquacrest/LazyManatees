@@ -21,14 +21,12 @@ body {
     width: 100%;
 }
 
-#homeButton {
-    margin: 0px 10px;
-}
-
-#newPostButton {
-    margin: 0px 10px;
+#homeButton, #newPostButton{
+    margin: 2px 10px;
+    border: 2px solid #F7C1C1;
+    border-radius: 5px;
 }
 
 #search {
-    margin: 0px 0px 0px 10px;
+    margin: 2px 0px 2px 10px;
 }
