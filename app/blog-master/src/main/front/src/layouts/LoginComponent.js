@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import AuthenticationService from '../service/AuthenticationService';
 import Button from "@material-ui/core/Button";
 import History from '../History';
+import TextField from '@material-ui/core/TextField';
 
 class LoginComponent extends Component {
 
@@ -47,18 +48,24 @@ class LoginComponent extends Component {
         return (
             <Fragment>
                 <form id="loginForm">
-                    <label htmlFor="username">Username</label><br />
-                    <input name="username" type="text" style={{ width: '15%' }} maxLength="10"
-                           value={this.state.username} onChange={this.handleChange.bind(this)} />
+                    {/*<label htmlFor="username">Username</label><br />*/}
+                    {/*<input name="username" type="text" style={{ width: '15%' }} maxLength="10"*/}
+                    {/*       value={this.state.username} onChange={this.handleChange.bind(this)} />*/}
 
+                    {/*<br /><br />*/}
+
+                    {/*<label htmlFor="password">Password</label><br />*/}
+                    {/*<input name="password" type="password" style={{ width: '15%' }} maxLength="10"*/}
+                    {/*       value={this.state.password} onChange={this.handleChange.bind(this)} />*/}
+
+                    {/*<br /><br />*/}
+
+                    <TextField name="username" label="Username" variant="outlined"
+                               value={this.state.username} onChange={this.handleChange.bind(this)} />
                     <br /><br />
-
-                    <label htmlFor="password">Password</label><br />
-                    <input name="password" type="password" style={{ width: '15%' }} maxLength="10"
-                           value={this.state.password} onChange={this.handleChange.bind(this)} />
-
+                    <TextField name="password" label="Password" variant="outlined" type="password"
+                               value={this.state.password} onChange={this.handleChange.bind(this)} />
                     <br /><br />
-
                     <Button variant='contained' onClick={ this.loginClicked.bind(this) }>Login</Button>
                 </form>
             </Fragment>

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import React from "react"
 import {
   Router,
   Switch,
@@ -8,168 +8,126 @@ import {
 
 import BlogPost from "./layouts/BlogPost"
 import NewPostForm from "./layouts/NewPostForm"
-import HomePage from './layouts/HomePage'
+import PostList from './layouts/PostList'
 import LoginComponent from './layouts/LoginComponent'
+
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
+import Container from '@material-ui/core/Container';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
+import TextField from '@material-ui/core/TextField';
 
 import AuthenticationService from './service/AuthenticationService';
 import History from './History';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'left',
-    color: theme.palette.text.secondary,
-  },
+    color: theme.palette.text.secondary
+  }
 }));
 
-export default function App(props) {
-
+export default function App() {
   let adminLoggedIn = AuthenticationService.isUserLoggedIn();
 
-  return (
-    <Router history={History}>
-
-      <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <p />
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"/>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav" id="navBar">
-            <li className="nav-item active" id="homeButton">
-              <Link to="/">Home</Link>
-            </li>
-            <li className="nav-item" id="newPostButton" hidden={ !adminLoggedIn }>
-              <Link to="/new">New Post</Link>
-            </li>
-            <li>
-              <input type="text" id="search" placeholder="Search"/>
-              <button id="searchButton" onClick={searchFunction}>Search</button>
-            </li>
-            <li className="nav-item" id="newPostButton">
-              <Link to="/login">Login</Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <div>
-        <Switch>
-          <Route path="/new">
-            <New />
-          </Route>
-          <Route exact path="/:postId(\d+)" component={ ViewPost } />
-          <Route path='/' exact component={Home} />
-          <Route path='/edit'>
-            <Edit />
-          </Route>
-          <Route path='/login' exact component={Login} />
-        </Switch>
-      </div>
-    </Router>
-  )
-}
-
-function Home() {
   const classes = useStyles();
 
   return (
-    <Fragment>
-      <div className={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={8}>
-            <Paper className={classes.paper}>
-              <ul id="postList">
-                <HomePage/>
-              </ul>
+      <Router history={History} style={{height: '100%'}}>
+
+        <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+          <p/>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"/>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav" id="navBar">
+              <li className="nav-item active" id="homeButton">
+                <Link to="/">Home</Link>
+              </li>
+              <li className="nav-item" id="newPostButton" hidden={!adminLoggedIn}>
+                <Link to="/new">New Post</Link>
+              </li>
+              <li className="nav-item" id="newPostButton">
+                <Link to="/login">Login</Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <Grid container className={classes.root}>
+          <Grid item xs={12} md={9}>
+            <Paper className={classes.paper} variant='outlined' square>
+              <Switch>
+                <Route path="/new">
+                  <New/>
+                </Route>
+                <Route exact path="/:postId(\d+)" component={ViewPost}/>
+                <Route path='/' exact component={Home}/>
+                <Route path='/edit'>
+                  <Edit/>
+                </Route>
+                <Route path='/login' exact component={Login}/>
+              </Switch>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <Paper className={classes.paper} variant='outlined' square>
+              <Container className={classes.sideBar}>
+                {/*<input type="text" id="search" placeholder="Search"/>*/}
+                {/*<button id="searchButton" onClick={searchFunction}>Search</button>*/}
+                <TextField id="search" label="Search" variant="outlined" style={{width: '85%'}}/>
+                <IconButton id="searchButton" aria-label="search" onClick={searchFunction}>
+                  <SearchIcon/>
+                </IconButton>
+                <SideBar/>
+              </Container>
             </Paper>
           </Grid>
         </Grid>
-      </div>
-    </Fragment>
-  )
-}
-
-function ViewPost(props) {
-  const classes = useStyles();
-
-  let postId = props.match.params.postId;
-  postId++;
-
-  return (
-    <Fragment>
-      <div className={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={8}>
-            <Paper className={classes.paper}>
-              <BlogPost postId={ postId } />
-            </Paper>
-          </Grid>
-        </Grid>
-      </div>
-    </Fragment>
-  )
-}
-
-function New() {
-  const classes = useStyles();
-
-  return (
-    <Fragment>
-      <div className={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={8}>
-            <Paper className={classes.paper}>
-              <NewPostForm/>
-            </Paper>
-          </Grid>
-        </Grid>
-      </div>
-    </Fragment>
-  )
-}
-
-function Edit() {
-  const classes = useStyles();
-
-  return (
-    <Fragment>
-      <div className={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={8}>
-            <Paper className={classes.paper}>
-              <NewPostForm />
-            </Paper>
-          </Grid>
-        </Grid>
-      </div>
-    </Fragment>
+      </Router>
   )
 }
 
 function Login() {
-  const classes = useStyles();
+  return <LoginComponent userLoggedIn={this.userLoggedIn()} />;
+}
 
+function userLoggedIn() {
+
+}
+
+function Home() {
+  return <p>Hello</p>;
+}
+
+function SideBar() {
   return (
-      <Fragment>
-        <div className={classes.root}>
-          <Grid container spacing={3}>
-            <Grid item xs={8}>
-              <Paper className={classes.paper}>
-                <LoginComponent />
-              </Paper>
-            </Grid>
-          </Grid>
-        </div>
-      </Fragment>
+      <ul id="postList">
+        <PostList />
+      </ul>
   )
+}
+
+function ViewPost(props) {
+  let postId = props.match.params.postId;
+
+  return <BlogPost postId={ postId } />;
+}
+
+function New() {
+  return <NewPostForm/>;
+}
+
+function Edit() {
+  return <NewPostForm />;
 }
 
 function searchFunction() {

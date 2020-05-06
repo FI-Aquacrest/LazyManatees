@@ -1,6 +1,6 @@
 import {Component, createElement} from 'react'
 
-class HomePage extends Component {
+class PostList extends Component {
   state = {
     isLoading: true,
     blogObjects: []
@@ -17,7 +17,7 @@ class HomePage extends Component {
     let linkList = [];
 
     for (let x = 0; x < blogObjects.length; x++) {
-      let link = createElement('a', {href: '/' + x}, blogObjects[x].blogTitle);
+      let link = createElement('a', {href: '/' + blogObjects[x].id}, blogObjects[x].blogTitle);
       linkList[x] = createElement('li', {key: x}, link);
     }
 
@@ -25,4 +25,4 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default PostList;
