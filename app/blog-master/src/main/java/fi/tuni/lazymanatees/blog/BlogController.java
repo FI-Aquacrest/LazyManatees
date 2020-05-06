@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 
-@CrossOrigin(origins={ "http://localhost:3000", "http://localhost:8080" })
+@CrossOrigin(origins={ "http://localhost:8080", "http://localhost:3000" })
 @RestController
 @RequestMapping("/api")
 public class BlogController {

@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import {
   Router,
   Switch,
@@ -33,10 +33,64 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function App() {
-  let adminLoggedIn = AuthenticationService.isUserLoggedIn();
-
+const App = (props) => {
   const classes = useStyles();
+
+  const [adminLoggedIn, setAdminLoggedIn] = useState(AuthenticationService.isUserLoggedIn);
+
+  const changeLogin = () => {
+    const adminLoggedIn = AuthenticationService.isUserLoggedIn();
+    setAdminLoggedIn(adminLoggedIn);
+  };
+
+  function Login() {
+    return <LoginComponent changeLogin={changeLogin} />;
+  }
+
+  function Home() {
+    return <p>Hello</p>;
+  }
+
+  function SideBar() {
+    return (
+        <ul id="postList">
+          <PostList />
+        </ul>
+    )
+  }
+
+  function ViewPost(props) {
+    let postId = props.match.params.postId;
+
+    return <BlogPost postId={ postId } />;
+  }
+
+  function New() {
+    return <NewPostForm/>;
+  }
+
+  function Edit() {
+    return <NewPostForm />;
+  }
+
+  function searchFunction() {
+    let input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('search');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("postList");
+    li = ul.getElementsByTagName('li');
+    console.log(li);
+
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName("a")[0];
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+  }
 
   return (
       <Router history={History} style={{height: '100%'}}>
@@ -94,57 +148,6 @@ export default function App() {
         </Grid>
       </Router>
   )
-}
+};
 
-function Login() {
-  return <LoginComponent userLoggedIn={userLoggedIn()} />;
-}
-
-function userLoggedIn() {
-
-}
-
-function Home() {
-  return <p>Hello</p>;
-}
-
-function SideBar() {
-  return (
-      <ul id="postList">
-        <PostList />
-      </ul>
-  )
-}
-
-function ViewPost(props) {
-  let postId = props.match.params.postId;
-
-  return <BlogPost postId={ postId } />;
-}
-
-function New() {
-  return <NewPostForm/>;
-}
-
-function Edit() {
-  return <NewPostForm />;
-}
-
-function searchFunction() {
-  var input, filter, ul, li, a, i, txtValue;
-  input = document.getElementById('search');
-  filter = input.value.toUpperCase();
-  ul = document.getElementById("postList");
-  li = ul.getElementsByTagName('li');
-  console.log(li);
-
-  for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName("a")[0];
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-}
+export default App;

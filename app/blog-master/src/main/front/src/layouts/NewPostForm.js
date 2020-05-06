@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import History from '../History';
 
 import AxiosInstance from "../service/AxiosInstance";
+import BlogPost from "./BlogPost";
 
 class NewPostForm extends Component {
 
@@ -11,7 +12,8 @@ class NewPostForm extends Component {
     writer: '',
     content: '',
     editPostId: null,
-    editing: false
+    editing: false,
+    editingDone: false
   };
 
   componentDidMount() {
@@ -78,7 +80,9 @@ class NewPostForm extends Component {
         console.log(response);
         if (response.status === 200) {
           alert("Post Updated");
-          History.push('/');
+          this.setState({
+            editingDone: true
+          })
         } else {
           alert("Authorization Required");
         }
@@ -125,6 +129,10 @@ class NewPostForm extends Component {
   }
 
   render() {
+
+    if (this.state.editingDone) {
+      return <BlogPost postId={ this.state.editPostId } />;
+    }
 
     return (
       <Fragment>

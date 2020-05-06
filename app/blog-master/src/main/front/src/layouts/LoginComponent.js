@@ -32,7 +32,6 @@ class LoginComponent extends Component {
             .executeBasicAuthenticationService(this.state.username, this.state.password)
             .then(() => {
                 AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
-                History.push('/');
             }).catch(() => {
                 this.setState({ hasLoginFailed: true });
             });
@@ -41,6 +40,8 @@ class LoginComponent extends Component {
             alert('Login failed.');
         } else {
             alert('Successfully logged in.');
+            this.props.changeLogin();
+            History.push('/');
         }
     }
 
