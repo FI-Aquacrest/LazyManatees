@@ -97,7 +97,7 @@ export default function App() {
 }
 
 function Login() {
-  return <LoginComponent userLoggedIn={this.userLoggedIn()} />;
+  return <LoginComponent userLoggedIn={userLoggedIn()} />;
 }
 
 function userLoggedIn() {
