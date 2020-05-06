@@ -17,7 +17,7 @@ class RandomPosts extends Component {
     let linkList = [];
 
     for (let x = 0; x < blogObjects.length; x++) {
-      let link = createElement('a', {href: '/' + x}, blogObjects[x].blogTitle);
+      let link = createElement('a', {href: '/' + blogObjects[x].id}, blogObjects[x].blogTitle);
       linkList[x] = createElement('li', {key: x}, link);
     }
 

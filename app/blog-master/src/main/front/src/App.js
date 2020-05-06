@@ -50,7 +50,7 @@ const App = () => {
 
   function Home() {
     return (
-      <ul id="postList">
+      <ul>
         <h2>Welcome!</h2>
         <h3><br/>Posts you might like</h3>
         <RandomPosts />
