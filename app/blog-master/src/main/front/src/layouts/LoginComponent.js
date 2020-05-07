@@ -37,7 +37,7 @@ class LoginComponent extends Component {
                 this.props.changeLogin();
             }).catch(() => {
                 this.setState({ hasLoginFailed: true });
-                alert('Login failed.');
+                alert('Login failed. Please check your username and password.');
             });
     }
 

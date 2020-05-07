@@ -39,6 +39,7 @@ const App = () => {
   const classes = useStyles();
 
   const [adminLoggedIn, setAdminLoggedIn] = useState(AuthenticationService.isUserLoggedIn);
+  const [postList, setPostList] = useState(document.getElementById("postList"));
 
   const loggedIn = () => {
     setAdminLoggedIn(AuthenticationService.isUserLoggedIn());
@@ -47,6 +48,10 @@ const App = () => {
   const loggedOut = () => {
     AuthenticationService.logout();
     setAdminLoggedIn(AuthenticationService.isUserLoggedIn());
+  };
+
+  const refreshPostList = () => {
+    setPostList(document.getElementById("postList"));
   };
 
   function Login() {
@@ -70,7 +75,7 @@ const App = () => {
   function SideBar() {
     return (
         <ul id="postList">
-          <h4><br/>Most recents Posts</h4>
+          <h4><br/>All Posts</h4>
           <PostList />
         </ul>
     )
@@ -79,15 +84,11 @@ const App = () => {
   function ViewPost(props) {
     let postId = props.match.params.postId;
 
-    return <BlogPost postId={ postId } />;
+    return <BlogPost postId={ postId } refreshPostList={refreshPostList} />;
   }
 
   function New() {
-    return <NewPostForm/>;
-  }
-
-  function Edit() {
-    return <NewPostForm />;
+    return <NewPostForm refreshPostList={refreshPostList} />;
   }
 
   /**
@@ -154,9 +155,6 @@ const App = () => {
                 </Route>
                 <Route exact path="/:postId(\d+)" component={ViewPost}/>
                 <Route path='/' exact component={Home}/>
-                <Route path='/edit'>
-                  <Edit/>
-                </Route>
                 <Route path='/login' exact component={Login}/>
                 <Route path='/logout' exact component={Logout}/>
               </Switch>

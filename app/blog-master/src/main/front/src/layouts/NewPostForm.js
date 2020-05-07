@@ -7,6 +7,10 @@ import BlogPost from "./BlogPost";
 
 class NewPostForm extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   state = {
     title: '',
     writer: '',
@@ -46,27 +50,6 @@ class NewPostForm extends Component {
     if (writer === '' || content === '' || title === '') {
       alert('Please make sure to fill all fields.');
     } else if (this.state.editing) {
-      // fetch('/api/blogposts', {
-      //   method: 'PUT',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     userName: writer,
-      //     blogPost: content,
-      //     blogTitle: title,
-      //     id: this.state.editPostId
-      //   })
-      // }).then(response => {
-      //   console.log(response);
-      //   if (response.status === 200) {
-      //     alert("Post Updated");
-      //     window.location.href = '/';
-      //   } else {
-      //     alert("Authorization Required");
-      //   }
-      // })
-
       AxiosInstance.put('/api/blogposts', {
         userName: writer,
         blogPost: content,
@@ -77,37 +60,17 @@ class NewPostForm extends Component {
           'Content-Type': 'application/json'
         }
       }).then(response => {
-        console.log(response);
         if (response.status === 200) {
           alert("Post Updated");
+          this.props.refreshPostList();
           this.setState({
             editingDone: true
-          })
+          });
         } else {
           alert("Authorization Required");
         }
       })
     } else {
-      // fetch('/api/blogposts', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     userName: writer,
-      //     blogPost: content,
-      //     blogTitle: title
-      //   })
-      // }).then(response => {
-      //   console.log(response);
-      //   if (response.status === 200) {
-      //     alert("Post Saved");
-      //     History.push('/');
-      //   } else {
-      //     alert("Authorization Required");
-      //   }
-      // })
-
       AxiosInstance.post('/api/blogposts', {
         userName: writer,
         blogPost: content,
@@ -120,6 +83,7 @@ class NewPostForm extends Component {
         console.log(response);
         if (response.status === 200) {
           alert("Post Saved");
+          this.props.refreshPostList();
           History.push('/');
         } else {
           alert("Authorization Required");
