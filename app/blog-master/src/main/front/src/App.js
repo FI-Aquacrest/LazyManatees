@@ -22,6 +22,7 @@ import TextField from '@material-ui/core/TextField';
 
 import AuthenticationService from './service/AuthenticationService';
 import History from './History';
+import LogoutComponent from "./layouts/LogoutComponent";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,13 +40,21 @@ const App = () => {
 
   const [adminLoggedIn, setAdminLoggedIn] = useState(AuthenticationService.isUserLoggedIn);
 
-  const changeLogin = () => {
-    const adminLoggedIn = AuthenticationService.isUserLoggedIn();
-    setAdminLoggedIn(adminLoggedIn);
+  const loggedIn = () => {
+    setAdminLoggedIn(AuthenticationService.isUserLoggedIn());
+  };
+
+  const loggedOut = () => {
+    AuthenticationService.logout();
+    setAdminLoggedIn(AuthenticationService.isUserLoggedIn());
   };
 
   function Login() {
-    return <LoginComponent changeLogin={changeLogin} />;
+    return <LoginComponent changeLogin={loggedIn} />;
+  }
+
+  function Logout() {
+    return <LogoutComponent />;
   }
 
   function Home() {
@@ -122,9 +131,16 @@ const App = () => {
               <li className="nav-item" id="newPostButton" hidden={!adminLoggedIn}>
                 <Link to="/new">New Post</Link>
               </li>
-              <li className="nav-item" id="newPostButton">
-                <Link to="/login">Login</Link>
-              </li>
+              {!adminLoggedIn &&
+                <li className="nav-item" id="newPostButton">
+                  <Link to="/login">Login</Link>
+                </li>
+              }
+              {adminLoggedIn &&
+                <li className="nav-item" id="newPostButton">
+                  <Link to="/logout" onClick={loggedOut}>Logout</Link>
+                </li>
+              }
             </ul>
           </div>
         </nav>
@@ -142,6 +158,7 @@ const App = () => {
                   <Edit/>
                 </Route>
                 <Route path='/login' exact component={Login}/>
+                <Route path='/logout' exact component={Logout}/>
               </Switch>
             </Paper>
           </Grid>

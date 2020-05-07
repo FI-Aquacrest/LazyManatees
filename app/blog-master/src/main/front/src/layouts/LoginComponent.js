@@ -32,17 +32,13 @@ class LoginComponent extends Component {
             .executeBasicAuthenticationService(this.state.username, this.state.password)
             .then(() => {
                 AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+                alert('Successfully logged in.');
+                History.push('/');
+                this.props.changeLogin();
             }).catch(() => {
                 this.setState({ hasLoginFailed: true });
+                alert('Login failed.');
             });
-
-        if (this.state.hasLoginFailed) {
-            alert('Login failed.');
-        } else {
-            alert('Successfully logged in.');
-            this.props.changeLogin();
-            History.push('/');
-        }
     }
 
     render() {
