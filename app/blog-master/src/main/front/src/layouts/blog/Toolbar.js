@@ -26,27 +26,27 @@ export default function Toolbar(props) {
   return (
     <div>
       <Grid container direction="row" alignItems="center">
-        <Grid item>
-          <IconButton aria-label="like" onClick={() => { props.likeCallback() }}>
-            <ThumbUpIcon />
-            </IconButton>
-        </Grid>
+        {/*<Grid item>*/}
+        {/*  <IconButton aria-label="like" onClick={() => { props.likeCallback() }}>*/}
+        {/*    <ThumbUpIcon />*/}
+        {/*    </IconButton>*/}
+        {/*</Grid>*/}
 
-        <Grid item>
-          { props.likes }
-        </Grid>
+        {/*<Grid item>*/}
+        {/*  { props.likes }*/}
+        {/*</Grid>*/}
 
-        <div className={ classes.divider } />
+        {/*<div className={ classes.divider } />*/}
 
-        <Grid item>
-          <IconButton aria-label="dislike" onClick={() => { {/*props.dislikeCallback()*/} }}>
-            <ThumbDownIcon />
-          </IconButton>
-        </Grid>
+        {/*<Grid item>*/}
+        {/*  <IconButton aria-label="dislike" onClick={() => { props.dislikeCallback() }}>*/}
+        {/*    <ThumbDownIcon />*/}
+        {/*  </IconButton>*/}
+        {/*</Grid>*/}
 
-        <Grid item>
-          { props.dislikes }
-        </Grid>
+        {/*<Grid item>*/}
+        {/*  { props.dislikes }*/}
+        {/*</Grid>*/}
 
         {/*<div className={ classes.divider } hidden={ !adminLoggedIn } />*/}
 
