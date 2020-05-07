@@ -23,6 +23,18 @@ public class BlogObject implements Serializable {
     // Title of the post.
     public String blogTitle;
 
+    // Upvote count.
+    public int upVote;
+
+    // Downvote count.
+    public int downVote;
+
+    // Is the object blogpost or comment.
+    public boolean comment;
+
+    // Is the object attached to blog post.
+    public int relatedPost;
+
     @Id
     @GeneratedValue
     public int id;
@@ -43,6 +55,29 @@ public class BlogObject implements Serializable {
         this.userName = uName;
         this.blogPost = post;
         this.blogTitle = title;
+        this.upVote = 0;
+        this.downVote = 0;
+        this.comment = false;
+        this.relatedPost = -1;
+    }
+
+    /**
+     * Creates a new comment object from given values
+     *
+     * @param uName Writer of the post.
+     * @param post Content of the post.
+     * @param title Title of the post.
+     * @param cValue Type of the object. False is blog post, true is a comment.
+     * @param postID The ID of parent post that comment is attached to.
+     */
+    public BlogObject(String uName, String post, String title, boolean cValue, int postID) {
+        this.userName = uName;
+        this.blogPost = post;
+        this.blogTitle = title;
+        this.upVote = 0;
+        this.downVote = 0;
+        this.comment = cValue;
+        this.relatedPost = postID;
     }
 
     /**
