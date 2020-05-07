@@ -78,9 +78,6 @@ class BlogPost extends Component {
       return <p>404</p>
     }
 
-    //let likes = 11;
-    //let dislikes = 999;
-
     return (
       <Fragment>
         <Title blogTitle={ blogObject.blogTitle } userName={ blogObject.userName } />

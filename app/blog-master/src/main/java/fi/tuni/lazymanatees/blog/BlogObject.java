@@ -45,7 +45,7 @@ public class BlogObject implements Serializable {
     public BlogObject() {}
 
     /**
-     * Creates a new blog post for pre-made blog posts.
+     * Creates a new blog post for pre-made data.
      *
      * @param uName Writer of the post.
      * @param post Content of the post.
