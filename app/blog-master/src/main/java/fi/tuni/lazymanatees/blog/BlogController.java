@@ -99,10 +99,4 @@ public class BlogController {
         blogdatabase.deleteById(id);
     }
 
-    @RequestMapping(value = "/blogposts", method = RequestMethod.PUT)
-    public BlogObject update(@RequestBody BlogObject blogObject) {
-        blogObject
-        blogdatabase.save(blogObject);
-        return blogObject;
-    }
 }

@@ -29,10 +29,10 @@ public class BlogObject implements Serializable {
     // Downvote count.
     public int downVote;
 
-    // Is the object blogpost or comment.
+    // Is the type of object.
     public boolean comment;
 
-    // Is the object attached to blog post.
+    // Is the object ID of attached blog post.
     public int relatedPost;
 
     @Id
