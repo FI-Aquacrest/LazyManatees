@@ -6,6 +6,9 @@ import NewPostForm from './NewPostForm'
 
 import AxiosInstance from "../service/AxiosInstance";
 
+/**
+ * Arranges the blog post using the "blog/" layouts.
+ */
 class BlogPost extends Component {
 
   constructor(props) {
@@ -29,10 +32,16 @@ class BlogPost extends Component {
         });
   }
 
+  /**
+   * Called when user wants to edit a post. Changes what is returned by this layout.
+   */
   editPostCallback() {
     this.setState({ editing: true });
   }
 
+  /**
+   * Deletes the current post from the database and returns user to the home page.
+   */
   deletePostCallback() {
     if (window.confirm("Are you sure you want to delete this post?")) {
       AxiosInstance.delete('/api/blogposts', {

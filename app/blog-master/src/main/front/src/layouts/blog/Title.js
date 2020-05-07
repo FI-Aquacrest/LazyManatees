@@ -20,8 +20,14 @@ const useStyles = makeStyles(theme => ({
     marginTop: '12.5px',
     marginLeft: '5px'
   }
-}))
+}));
 
+/**
+ * Contains the post title, writer and writing date.
+ *
+ * An avatar is added to the writer based on the first letter of their name.
+ * The "date" field is not properly implemented and always shows the current date.
+ */
 export default function Title(props) {
   const classes = useStyles();
   const today = new Date();

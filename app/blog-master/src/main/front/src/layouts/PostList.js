@@ -1,5 +1,8 @@
 import {Component, createElement} from 'react'
 
+/**
+ * Creates a list of all blog posts fetched from the database.
+ */
 class PostList extends Component {
   state = {
     isLoading: true,

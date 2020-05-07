@@ -5,6 +5,9 @@ import History from '../History';
 import AxiosInstance from "../service/AxiosInstance";
 import BlogPost from "./BlogPost";
 
+/**
+ * Form used for creating new posts and editing old ones.
+ */
 class NewPostForm extends Component {
 
   constructor(props) {
@@ -20,6 +23,9 @@ class NewPostForm extends Component {
     editingDone: false
   };
 
+  /**
+   * If there a blogObject to be edited exists, sets the state of all fields to the post's current values.
+   */
   componentDidMount() {
     if (this.props.blogObject !== undefined) {
       this.setState({ title: this.props.blogObject.blogTitle,
@@ -30,18 +36,36 @@ class NewPostForm extends Component {
     }
   }
 
+  /**
+   * Updates the Title -field when user changes it.
+   *
+   * @param event User changes the field's text.
+   */
   titleChangeEvent(event) {
     this.setState({ title: event.target.value })
   }
 
+  /**
+   * Updates the Writer -field when user changes it.
+   *
+   * @param event User changes the field's text.
+   */
   writerChangeEvent(event) {
     this.setState({ writer: event.target.value })
   }
 
+  /**
+   * Updates the Content -field when user changes it.
+   *
+   * @param event User changes the field's text.
+   */
   contentChangeEvent(event) {
     this.setState({ content: event.target.value })
   }
 
+  /**
+   * If all of the textFields have text on them, sends the post for updating/saving.
+   */
   postCommand() {
     const writer = this.state.writer;
     const content = this.state.content;

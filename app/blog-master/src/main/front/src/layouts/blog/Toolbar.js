@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * If admin is logged in, displays buttons for editing and deleting posts. Otherwise does nothing.
+ */
 export default function Toolbar(props) {
   const classes = useStyles();
 

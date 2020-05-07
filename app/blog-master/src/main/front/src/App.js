@@ -8,7 +8,7 @@ import {
 
 import BlogPost from "./layouts/BlogPost"
 import NewPostForm from "./layouts/NewPostForm"
-import RandomPosts from './layouts/blog/RandomPosts'
+import RandomPosts from './layouts/RandomPosts'
 import PostList from './layouts/PostList'
 import LoginComponent from './layouts/LoginComponent'
 
@@ -35,33 +35,61 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+/**
+ * Core web page. Contains everything between the title and the footer.
+ */
 const App = () => {
   const classes = useStyles();
 
+  /**
+   * Sets up a useState for log-in status. Updates when logging in or out.
+   */
   const [adminLoggedIn, setAdminLoggedIn] = useState(AuthenticationService.isUserLoggedIn);
+
+  /**
+   * Sets up a useState for the side-bar list containing all posts. Updates when editing or adding a post.
+   */
   const [postList, setPostList] = useState(document.getElementById("postList"));
 
+  /**
+   * Updates the UI when user logs in.
+   */
   const loggedIn = () => {
     setAdminLoggedIn(AuthenticationService.isUserLoggedIn());
   };
 
+  /**
+   * Updates the UI when user logs out.
+   */
   const loggedOut = () => {
     AuthenticationService.logout();
     setAdminLoggedIn(AuthenticationService.isUserLoggedIn());
   };
 
+  /**
+   * Updates the UI when editing or adding a post.
+   */
   const refreshPostList = () => {
     setPostList(document.getElementById("postList"));
   };
 
+  /**
+   * Returns a LoginComponent. Used with routing.
+   */
   function Login() {
     return <LoginComponent changeLogin={loggedIn} />;
   }
 
+  /**
+   * Returns a LogoutComponent. Used with routing.
+   */
   function Logout() {
     return <LogoutComponent />;
   }
 
+  /**
+   * Returns a list with random posts as the home page. Used with routing.
+   */
   function Home() {
     return (
       <ul>
@@ -72,6 +100,9 @@ const App = () => {
     )
   }
 
+  /**
+   * Places a SideBar to the right side of the page. This is always active.
+   */
   function SideBar() {
     return (
         <ul id="postList">
@@ -81,12 +112,18 @@ const App = () => {
     )
   }
 
+  /**
+   * Returns a LoginComponent. Used with routing.
+   */
   function ViewPost(props) {
     let postId = props.match.params.postId;
 
     return <BlogPost postId={ postId } refreshPostList={refreshPostList} />;
   }
 
+  /**
+   * Returns a LoginComponent. Used with routing.
+   */
   function New() {
     return <NewPostForm refreshPostList={refreshPostList} />;
   }

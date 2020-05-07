@@ -4,6 +4,9 @@ import Button from "@material-ui/core/Button";
 import History from '../History';
 import TextField from '@material-ui/core/TextField';
 
+/**
+ * Asks the user for a userName and password and sends them to be authenticated.
+ */
 class LoginComponent extends Component {
 
     constructor(props) {

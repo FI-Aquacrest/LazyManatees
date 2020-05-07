@@ -28,6 +28,11 @@ public class BlogObject implements Serializable {
     public int id;
 
     /**
+     * Default constructor.
+     */
+    public BlogObject() {}
+
+    /**
      * Creates a new blog post from the given values.
      *
      * @param uName Writer of the post.
