@@ -5,6 +5,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * Controls the URL mapping and handles HTML requests.
+ *
+ * Cross-origin requests not working.
+ */
 @CrossOrigin(origins={ "http://localhost:8080", "http://localhost:3000" })
 @RestController
 @RequestMapping("/api")
@@ -13,6 +18,9 @@ public class BlogController {
     @Autowired
     DatabaseHandler blogdatabase;
 
+    /**
+     * Fills the database with pre-made blog posts.
+     */
     @PostConstruct
     public void init() {
         blogdatabase.save(new BlogObject("xXx_Comrade_xXX", "Join the Glorius Revolution!" + "\n" + "All members of the working classes must seize the means of production.", "Call for all Comrades"));
@@ -26,30 +34,68 @@ public class BlogController {
         blogdatabase.save(new BlogObject("Karl Marx", "The bourgeoisie has stripped of its halo every occupation hitherto honored and looked up to with reverent awe. It has converted the physician, the lawyer, the priest, the poet, the man of science, into its paid wage laborers." + "\n" + "The bourgeoisie has torn away from the family its sentimental veil, and has reduced the family relation to a mere money relation." + "\n" + "Let the ruling classes tremble at a Communistic revolution. The proletarians have nothing to lose but their chains. They have a world to win." + "\n" + "Workingmen of all countries unite!", "The Communist Manifesto pt3"));
     }
 
+    /**
+     * Saves the received blogObject to the database.
+     *
+     * @param blogObject Blog post received as JSON input.
+     * @return The saves blogObject for debugging purposes.
+     */
     @RequestMapping(value = "/blogposts", method = RequestMethod.POST)
     public @ResponseBody BlogObject newPost(@RequestBody BlogObject blogObject) {
         blogdatabase.save(new BlogObject(blogObject.userName, blogObject.blogPost, blogObject.blogTitle));
         return blogObject;
     }
 
+    /**
+     * Returns all blog posts from the database.
+     *
+     * @return list containing all blog objects.
+     */
     @RequestMapping(value = "/blogposts", method = RequestMethod.GET)
     public Iterable<BlogObject> fetchAll() {
         return blogdatabase.findAll();
     }
 
+    /**
+     * Returns the blog post with the given ID.
+     *
+     * @param id of the blog post to be returned.
+     * @return The requested blog post.
+     */
     @RequestMapping(value = "/blogposts/{id}", method = RequestMethod.GET)
     public BlogObject get(@PathVariable("id") int id) {
         return blogdatabase.findById(id).get();
     }
 
+    /**
+     * Updates a blog post in the database based on ID.
+     *
+     * @param blogObject Updated blog post that will replace the old post with the same ID.
+     * @return The updated blog post for debugging purposes.
+     */
     @RequestMapping(value = "/blogposts", method = RequestMethod.PUT)
     public BlogObject update(@RequestBody BlogObject blogObject) {
         blogdatabase.save(blogObject);
         return blogObject;
     }
 
+    /**
+     * Deleted the blog post given as a parameter from the database.
+     *
+     * @param blogObject To delete from the database.
+     */
     @RequestMapping(value = "/blogposts", method = RequestMethod.DELETE)
     public @ResponseBody void delete(@RequestBody BlogObject blogObject) {
         blogdatabase.delete(blogObject);
+    }
+
+    /**
+     * Deletes a blog object with the given ID from the database.
+     *
+     * @param id of the post to delete.
+     */
+    @RequestMapping(value = "/blogposts/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody void delete(@PathVariable("id") int id) {
+        blogdatabase.deleteById(id);
     }
 }

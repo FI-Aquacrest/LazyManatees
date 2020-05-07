@@ -5,6 +5,9 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * CrudRepository for the BlogObjects.
+ */
 public interface DatabaseHandler extends CrudRepository<BlogObject, Integer> {
     List<BlogObject> findByUserNameOrderByIdDesc(String uName);
 

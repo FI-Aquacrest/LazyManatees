@@ -16,9 +16,16 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * Configures basic HTTP authentication and allows routing between blog posts.
+ */
 @Configuration
 @EnableWebSecurity
 public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
+
+	/**
+	 * Specifies what requests are allowed by non-admin users and which ones require authentication.
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -31,6 +38,9 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
 				.httpBasic();
 	}
 
+	/**
+	 * Configures username and password for the admin user.
+	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
@@ -42,17 +52,20 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
 				.authorities("ADMIN_AUTH");
 	}
 
+	/**
+	 * Returns an encoder that is used to encode the password.
+	 */
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
+	/**
+	 * Allows routing with numbers directly after the base url.
+	 */
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/{spring:\\w+}")
-				.setViewName("forward:/");
-
-		registry.addViewController("/login")
 				.setViewName("forward:/");
 	}
 }
