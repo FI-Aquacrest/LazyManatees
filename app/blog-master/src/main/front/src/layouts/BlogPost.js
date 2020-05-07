@@ -78,8 +78,8 @@ class BlogPost extends Component {
       return <p>404</p>
     }
 
-    let likes = 11;
-    let dislikes = 999;
+    //let likes = 11;
+    //let dislikes = 999;
 
     return (
       <Fragment>
@@ -87,7 +87,7 @@ class BlogPost extends Component {
         <hr />
         <Content blogPost={ blogObject.blogPost } />
 
-        <Toolbar likes={ likes } dislikes={ dislikes }
+        <Toolbar likes={ blogObject.upVote } dislikes={ blogObject.downVote }
           editPostCallback={ this.editPostCallback.bind(this) }
           deletePostCallback={ this.deletePostCallback.bind(this) } />
 
