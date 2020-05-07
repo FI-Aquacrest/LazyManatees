@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
- * Object representation of the blog posts.
+ * Object representation of the blog objects.
  */
 @Entity
 public class BlogObject implements Serializable {
@@ -43,6 +43,25 @@ public class BlogObject implements Serializable {
      * Default constructor.
      */
     public BlogObject() {}
+
+    /**
+     * Creates a new blog post for pre-made blog posts.
+     *
+     * @param uName Writer of the post.
+     * @param post Content of the post.
+     * @param title Title of the post.
+     * @param upVote Blog posts upvotes.
+     * @param downVote Blog posts downvotes.
+     */
+    public BlogObject(String uName, String post, String title, int upVote, int downVote) {
+        this.userName = uName;
+        this.blogPost = post;
+        this.blogTitle = title;
+        this.upVote = upVote;
+        this.downVote = downVote;
+        this.comment = false;
+        this.relatedPost = -1;
+    }
 
     /**
      * Creates a new blog post from the given values.
@@ -144,10 +163,97 @@ public class BlogObject implements Serializable {
     }
 
     /**
+     * Getter for blog title.
+     *
+     * @return Blog title
+     */
+    public String getBlogTitle() {
+        return blogTitle;
+    }
+
+    /**
+     * Getter for upvotes
+     *
+     * @return Amount of upvotes
+     */
+    public int getUpVote() {
+        return upVote;
+    }
+
+    /**
+     * Getter for downvotes.
+     *
+     * @return Amount of downvotes.
+     */
+    public int getDownVote() {
+        return downVote;
+    }
+
+    /**
+     * Getter object type.
+     *
+     * @return Object type.
+     */
+    public boolean isComment() {
+        return comment;
+    }
+
+    /**
+     * Getter for related post ID.
+     *
+     * @return Related post ID.
+     */
+    public int getRelatedPost() {
+        return relatedPost;
+    }
+
+    /**
+     * Setter for blog title.
+     *
+     * @param blogTitle Blog title.
+     */
+    public void setBlogTitle(String blogTitle) {
+        this.blogTitle = blogTitle;
+    }
+
+    /**
+     * Setter for blogpost upvotes. Only needs to add one at a time.
+     */
+    public void setUpVote() {
+        this.upVote += 1;
+    }
+
+    /**
+     * Setter for blogpost downvotes. Only needs add one at a time
+     */
+    public void setDownVote() {
+        this.downVote += 1;
+    }
+
+    /**
+     * Setter for type of object. False is a blog post, true a comment object.
+     *
+     * @param comment type of object.
+     */
+    public void setComment(boolean comment) {
+        this.comment = comment;
+    }
+
+    /**
+     * Setter for related post ID. Tells to which post the comment is attached to.
+     *
+     * @param relatedPost ID of parent blog post.
+     */
+    public void setRelatedPost(int relatedPost) {
+        this.relatedPost = relatedPost;
+    }
+
+    /**
      * Returns a string representation of the post.
      *
      * @return String representation of the post.
      */
+
     @Override
     public String toString() {
         return "Input{" +

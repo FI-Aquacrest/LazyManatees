@@ -27,7 +27,7 @@ export default function Toolbar(props) {
     <div>
       <Grid container direction="row" alignItems="center">
         <Grid item>
-          <IconButton aria-label="like" onClick={() => { props.likeCallback() }}>
+          <IconButton aria-label="like" onClick={() => { {/*props.likeCallback()*/} }}>
             <ThumbUpIcon />
           </IconButton>
         </Grid>
@@ -48,7 +48,7 @@ export default function Toolbar(props) {
           { props.dislikes }
         </Grid>
 
-        <div className={ classes.divider } hidden={ !adminLoggedIn } />
+        {/*<div className={ classes.divider } hidden={ !adminLoggedIn } />*/}
 
         <Grid item hidden={ !adminLoggedIn }>
           <IconButton aria-label="edit" onClick={() => { props.editPostCallback() }}>

@@ -30,9 +30,6 @@ public class BlogApplication implements CommandLineRunner {
 	@Override
 	public void run(String ... args) throws Exception {
 
-		//Tests for terminalprint
-		//blogdatabase.findAll().forEach(System.out::println);
-		//blogdatabase.save(new BlogObject("sda","afsaf", "title3"));
 	}
 
 	/**
@@ -52,7 +49,7 @@ public class BlogApplication implements CommandLineRunner {
 			logger.info("Username: admin");
 			logger.info("Password: admin");
 			logger.info("");
-			logger.info("Here are some cURL commands for backend testing:");
+			logger.info("Here are some CURL commands for backend testing:");
 			logger.info("curl --request GET http://localhost:8080/api/blogposts (get all blog posts)");
 			logger.info("curl --user \"admin:admin\" --request DELETE http://localhost:8080/api/blogposts/3 " +
 					"(delete post with an ID of 3)");
